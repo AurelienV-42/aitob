@@ -17,7 +17,7 @@ export function PostListHeader({
 }) {
   return (
     <div className="flex justify-between items-center">
-      <h1 className="text-3xl font-bold">Publications</h1>
+      <h1 className="text-3xl font-bold">Mes publications</h1>
       <button
         onClick={onCreateClick}
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"

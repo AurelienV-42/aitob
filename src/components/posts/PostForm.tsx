@@ -1,5 +1,4 @@
-import { USER_ID } from "@/config";
-import { useCreatePost, useUpdatePost } from "@/lib/hooks/usePosts";
+import { useUpdatePost } from "@/lib/hooks/usePosts";
 import { type Post } from "@/lib/supabase";
 import { useState } from "react";
 
@@ -9,7 +8,6 @@ interface PostFormProps {
 }
 
 export function PostForm({ post, onClose }: PostFormProps) {
-  const createPost = useCreatePost();
   const updatePost = useUpdatePost();
   const [text, setText] = useState(post?.text ?? "");
   const [topicsInput, setTopicsInput] = useState(
@@ -33,13 +31,6 @@ export function PostForm({ post, onClose }: PostFormProps) {
           posted_at: post.posted_at,
           user_id: post.user_id,
         },
-      });
-    } else {
-      await createPost.mutateAsync({
-        text,
-        topics,
-        user_id: USER_ID,
-        posted_at: null,
       });
     }
 

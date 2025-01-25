@@ -1,10 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  type InsertPost,
-  type Post,
-  supabase,
-  type UpdatePost,
-} from "../supabase";
+import { type Post, supabase, type UpdatePost } from "../supabase";
 
 export function usePosts() {
   return useQuery({
@@ -13,46 +8,10 @@ export function usePosts() {
       const { data, error } = await supabase
         .from("posts")
         .select("*")
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: true });
 
       if (error) throw error;
       return data as Post[];
-    },
-  });
-}
-
-export function usePost(id: number) {
-  return useQuery({
-    queryKey: ["posts", id],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("id", id)
-        .single();
-
-      if (error) throw error;
-      return data as Post;
-    },
-  });
-}
-
-export function useCreatePost() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (post: InsertPost) => {
-      const { data, error } = await supabase
-        .from("posts")
-        .insert(post)
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data as Post;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
 }
