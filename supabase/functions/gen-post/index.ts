@@ -305,10 +305,20 @@ serve(async (req) => {
     }
 
     const messagesData = await messages.json();
-    const generatedText = messagesData.data[0].content[0].text.value.replace(
-      "**",
-      "",
-    );
+    const generatedText = String(messagesData.data[0].content[0].text.value)
+      .replaceAll(
+        "**",
+        "",
+      ).replaceAll(
+        "***",
+        "",
+      ).replaceAll(
+        "##",
+        "",
+      ).replaceAll(
+        "###",
+        "",
+      );
 
     // console.log("[Step 6] Saving to database");
 

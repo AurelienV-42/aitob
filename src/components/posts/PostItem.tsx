@@ -2,7 +2,6 @@ import { type Post } from "@/lib/supabase";
 import { useState } from "react";
 import { PostActions } from "./PostActions";
 import { PostForm } from "./PostForm";
-import { PostMeta } from "./PostMeta";
 
 interface PostItemProps {
   post: Post;
@@ -39,7 +38,7 @@ export function PostItem({
             <div className="flex items-center gap-2 h-12 mb-2">
               <div className="w-12 h-12 bg-gray-200 rounded-sm" />
               <div className="ml-1">
-                <p className="text-[16px] font-semibold h-[19px]">
+                <p className="text-[16px] font-semibold h-[19px] mb-0.5">
                   Aurélien Vandaële
                 </p>
                 <p className="text-gray-400 font-light text-[12px] h-[14px]">
@@ -70,7 +69,6 @@ export function PostItem({
         </div>
         <PostActions post={post} />
       </div>
-      <PostMeta createdAt={post.created_at} postedAt={post.posted_at} />
     </div>
   );
 }
