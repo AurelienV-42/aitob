@@ -8,6 +8,7 @@ export function usePosts() {
       const { data, error } = await supabase
         .from("posts")
         .select("*")
+        .filter("posted_at", "is", null)
         .order("created_at", { ascending: true });
 
       if (error) throw error;
